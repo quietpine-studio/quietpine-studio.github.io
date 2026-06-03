@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QUIETPINE · Audit-Readiness-Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#36523F; --deep:#23362A; --sage:#8AA188; --mist:#DCE3DA;
+    --paper:#F6F4EC; --cream:#EDE7D8; --ink:#2B2E2B; --white:#FFFFFF;
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--mist);font-family:var(--sans);color:var(--ink);
+       line-height:1.6;padding:32px 16px;}
+  .wrap{max-width:680px;margin:0 auto;background:var(--paper);border-radius:18px;overflow:hidden;
+        box-shadow:0 10px 40px rgba(35,54,42,.12);}
+  .head{position:relative;background:var(--pine);color:var(--white);padding:34px 36px 30px;text-align:center}
+  .head svg{width:54px;height:54px;display:block;margin:0 auto 10px}
+  .close{position:absolute;top:14px;right:16px;width:34px;height:34px;border-radius:50%;
+         border:1.5px solid var(--sage);color:var(--white);text-decoration:none;font-size:20px;line-height:31px;
+         text-align:center;transition:all .15s}
+  .close:hover{background:var(--deep);border-color:var(--white)}
+  .backbar{max-width:680px;margin:0 auto 12px}
+  .backbar a{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:14px;
+             color:var(--pine);text-decoration:none}
+  .backbar a:hover{text-decoration:underline}
+  .eyebrow{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--sage);margin:0 0 8px}
+  .head h1{font-family:var(--serif);font-weight:500;font-size:34px;line-height:1.15;margin:0}
+  .head p{font-size:15px;color:var(--mist);margin:10px 0 0}
+  .body{padding:30px 36px 36px}
+  .q{padding:18px 0;border-bottom:1px solid var(--mist)}
+  .q:last-of-type{border-bottom:none}
+  .q .num{font-family:var(--serif);font-size:20px;color:var(--sage);font-weight:600;margin-right:8px}
+  .q label{font-size:16px;color:var(--deep);display:block;margin-bottom:12px}
+  .opts{display:flex;gap:8px;flex-wrap:wrap}
+  .opt{flex:1;min-width:90px;border:1.5px solid var(--mist);background:var(--white);color:var(--ink);
+       border-radius:10px;padding:10px 8px;font-family:var(--sans);font-size:14px;cursor:pointer;
+       transition:all .15s;text-align:center}
+  .opt:hover{border-color:var(--sage)}
+  .opt.sel{background:var(--pine);border-color:var(--pine);color:var(--white)}
+  .cta-eval{width:100%;margin-top:26px;background:var(--pine);color:var(--white);border:none;
+            border-radius:12px;padding:16px;font-family:var(--serif);font-size:21px;font-weight:500;
+            letter-spacing:.5px;cursor:pointer;transition:background .15s}
+  .cta-eval:hover{background:var(--deep)}
+  .cta-eval:disabled{background:var(--sage);cursor:not-allowed;opacity:.6}
+  .result{display:none;margin-top:30px;padding-top:26px;border-top:2px solid var(--mist)}
+  .score-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .score-badge{width:120px;height:120px;border-radius:50%;display:flex;flex-direction:column;
+               align-items:center;justify-content:center;flex-shrink:0;color:var(--white)}
+  .score-badge .n{font-family:var(--serif);font-size:42px;font-weight:600;line-height:1}
+  .score-badge .d{font-size:13px;opacity:.85}
+  .score-txt h2{font-family:var(--serif);font-weight:600;font-size:26px;margin:0 0 6px;color:var(--deep)}
+  .score-txt p{margin:0;font-size:15px;color:var(--ink)}
+  .gaps{margin:24px 0 0}
+  .gaps h3{font-family:var(--serif);font-weight:600;font-size:20px;color:var(--deep);margin:0 0 12px}
+  .gap{display:flex;gap:12px;align-items:flex-start;background:var(--white);border:1px solid var(--mist);
+       border-radius:10px;padding:12px 14px;margin-bottom:8px}
+  .gap .dot{width:9px;height:9px;border-radius:50%;background:var(--sage);margin-top:7px;flex-shrink:0}
+  .gap b{color:var(--deep);font-weight:500}
+  .gap span{display:block;font-size:13px;color:#6b6f68;margin-top:2px}
+  .none{font-size:15px;color:var(--pine);font-style:italic}
+  .offer{margin-top:26px;background:var(--pine);border-radius:14px;padding:26px 28px;color:var(--white)}
+  .offer h3{font-family:var(--serif);font-weight:500;font-size:24px;margin:0 0 8px}
+  .offer p{font-size:14px;color:var(--mist);margin:0 0 18px}
+  .form{display:flex;gap:8px;flex-wrap:wrap}
+  .form input{flex:1;min-width:200px;border:none;border-radius:10px;padding:14px 16px;
+              font-family:var(--sans);font-size:15px}
+  .form button{background:var(--cream);color:var(--deep);border:none;border-radius:10px;
+               padding:14px 22px;font-family:var(--serif);font-size:18px;font-weight:600;cursor:pointer}
+  .form button:hover{background:var(--white)}
+  .thanks{display:none;margin-top:16px;background:rgba(255,255,255,.12);border-radius:10px;padding:16px;
+          font-size:14px;color:var(--white)}
+  .thanks a{color:var(--cream);font-weight:500}
+  .foot{text-align:center;font-size:12px;color:var(--sage);padding:18px;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="backbar"><a href="business.html">← Zurück zu QUIETPINE</a></div>
+<div class="wrap">
+  <div class="head">
+    <a class="close" href="business.html" aria-label="Check schließen">×</a>
+    <svg viewBox="0 0 100 100" aria-hidden="true"><g transform="translate(-3.05,-22.42) scale(1.4593)"><path d="M 44.80 57.48 Q 57.37 44.03 62.33 21.53 Q 51.98 41.40 44.80 57.48 Z" fill="#FFFFFF"/><path d="M 42.00 60.70 Q 55.84 51.18 63.16 31.58 Q 50.66 47.41 42.00 60.70 Z" fill="#FFFFFF"/><path d="M 39.20 63.92 Q 53.29 58.24 62.22 41.69 Q 48.70 53.49 39.20 63.92 Z" fill="#FFFFFF"/><path d="M 36.40 67.14 Q 49.70 64.66 59.34 51.08 Q 46.03 59.42 36.40 67.14 Z" fill="#FFFFFF"/><path d="M 33.60 70.36 Q 45.46 70.58 55.17 59.84 Q 42.83 65.19 33.60 70.36 Z" fill="#FFFFFF"/><path d="M 30.80 73.58 Q 40.71 75.88 49.93 67.73 Q 39.13 70.72 30.80 73.58 Z" fill="#FFFFFF"/><path d="M 28.00 76.80 Q 35.70 80.44 43.80 74.30 Q 34.95 75.70 28.00 76.80 Z" fill="#FFFFFF"/><path d="M 27.20 77.72 L 9.54 68.33" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M 27.20 77.72 L 15.12 67.22" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M 27.20 77.72 L 20.15 68.01" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" fill="none"/></g></svg>
+    <p class="eyebrow">QUIETPINE · Gratis-Check</p>
+    <h1>Wie audit-ready ist deine Dokumentation?</h1>
+    <p>7 Fragen, 60 Sekunden. Du erfährst sofort, welche Dokumente dir noch fehlen.</p>
+  </div>
+  <div class="body">
+    <div id="quiz"></div>
+    <button class="cta-eval" id="evalBtn" disabled>Auswerten</button>
+
+    <div class="result" id="result">
+      <div class="score-row">
+        <div class="score-badge" id="badge"><span class="n" id="scoreNum">0</span><span class="d">/ 14 Punkte</span></div>
+        <div class="score-txt"><h2 id="bandTitle"></h2><p id="bandText"></p></div>
+      </div>
+      <div class="gaps" id="gapsBox">
+        <h3>Das schließt deine Lücken:</h3>
+        <div id="gapList"></div>
+      </div>
+      <div class="offer">
+        <h3>Hol dir den vollständigen Report + die passenden Vorlagen</h3>
+        <p>Detaillierte Auswertung + das SOP System, das genau diese Lücken schließt — Word + ausfüllbares PDF, kein Notion nötig.</p>
+        <div class="form">
+          <input type="email" id="email" placeholder="Deine E-Mail-Adresse" aria-label="E-Mail">
+          <button id="sendBtn">Sichern</button>
+        </div>
+        <div class="thanks" id="thanks">Danke! Check deinen Posteingang — und sieh dir hier das SOP System an: <a href="business.html">QUIETPINE Business</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot">QUIETPINE · Arbeitsanweisungen, die man wirklich liest</div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {q:"Sind eure Arbeitsanweisungen zentral an einem Ort auffindbar – statt verstreut in Ordnern und Köpfen?",
+   gap:"Zentrale SOP-Library", desc:"Eine Datenbank für alle Anweisungen deines Teams."},
+  {q:"Hat jede Anweisung eine eindeutige Nummer, einen Revisionsstand und eine dokumentierte Freigabe (wer/wann)?",
+   gap:"Nummernkreis + Revisions- & Freigabefelder", desc:"QP-001, QP-002 … mit Erstellt/Geprüft/Freigegeben."},
+  {q:"Könnt ihr im Audit sofort nachweisen, wer wann zuletzt geschult wurde?",
+   gap:"Schulungs-Tracker", desc:"Wer wurde wann geschult – die Audit-Frage Nr. 1."},
+  {q:"Folgen alle Dokumente einem einheitlichen, lesbaren Layout – statt jeder macht sein eigenes?",
+   gap:"Einheitliches Vorlagen-Design", desc:"Ein Layout, das gelesen wird – nicht ignoriert."},
+  {q:"Sind Sicherheits- und Warnhinweise einheitlich und klar abgesetzt?",
+   gap:"Einheitliches Warnhinweis-System", desc:"Risiken klar markiert, genau wo sie passieren."},
+  {q:"Gibt es einen definierten Status-Workflow (Entwurf → Review → Freigegeben)?",
+   gap:"Status-Workflow", desc:"Entwurf → In Review → Freigegeben, nachvollziehbar."},
+  {q:"Findet ihr im Audit jedes geforderte Dokument in unter 2 Minuten?",
+   gap:"Dokumentenlenkungsliste (Master-Index)", desc:"Alles auffindbar, jederzeit, ohne Suchen."}
+];
+const answers = new Array(QUESTIONS.length).fill(null);
+const quiz = document.getElementById('quiz');
+QUESTIONS.forEach((item,i)=>{
+  const d=document.createElement('div'); d.className='q';
+  d.innerHTML=`<label><span class="num">${i+1}</span>${item.q}</label>
+    <div class="opts" data-i="${i}">
+      <button class="opt" data-v="2">Ja</button>
+      <button class="opt" data-v="1">Teilweise</button>
+      <button class="opt" data-v="0">Nein</button>
+    </div>`;
+  quiz.appendChild(d);
+});
+quiz.addEventListener('click',e=>{
+  const btn=e.target.closest('.opt'); if(!btn) return;
+  const row=btn.parentElement; const i=+row.dataset.i;
+  [...row.children].forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel'); answers[i]=+btn.dataset.v;
+  document.getElementById('evalBtn').disabled = answers.includes(null);
+});
+document.getElementById('evalBtn').addEventListener('click',()=>{
+  const score = answers.reduce((a,b)=>a+b,0);
+  document.getElementById('scoreNum').textContent = score;
+  const badge=document.getElementById('badge');
+  const title=document.getElementById('bandTitle');
+  const text=document.getElementById('bandText');
+  let color;
+  if(score>=11){color='#36523F';title.textContent='Audit-ready';
+    text.textContent='Solide Basis. Mit etwas Feinschliff seid ihr auf Premium-Niveau.';}
+  else if(score>=6){color='#BA7517';title.textContent='Lückenhaft';
+    text.textContent='Im Kern okay – aber im Audit drohen Rückfragen. Diese Lücken solltest du schließen:';}
+  else {color='#A32D2D';title.textContent='Kritisch';
+    text.textContent='Hohes Risiko bei Fehlern und Audits. Hier liegt dein größter Hebel:';}
+  badge.style.background=color;
+  const gaps = QUESTIONS.filter((_,i)=>answers[i]<2);
+  const list=document.getElementById('gapList');
+  const gapsBox=document.getElementById('gapsBox');
+  if(gaps.length===0){
+    gapsBox.innerHTML='<p class="none">Stark – an allen 7 Stellen sauber aufgestellt. Dein Feinschliff-Report wartet unten.</p>';
+  } else {
+    list.innerHTML = gaps.map(g=>`<div class="gap"><span class="dot"></span><div><b>${g.gap}</b><span>${g.desc}</span></div></div>`).join('');
+  }
+  document.getElementById('result').style.display='block';
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+});
+document.getElementById('sendBtn').addEventListener('click',()=>{
+  const em=document.getElementById('email').value.trim();
+  if(!/^\S+@\S+\.\S+$/.test(em)){document.getElementById('email').focus();return;}
+  // TODO Coleen: E-Mail hier an dein Tool senden (z.B. fetch POST an deinen Anbieter / Zapier-Webhook)
+  document.getElementById('thanks').style.display='block';
+  document.getElementById('email').value='';
+});
+</script>
+</body>
+</html>
