@@ -1,0 +1,58 @@
+/* QUIETPINE – dezente dynamische Elemente (ergänzt styles.css) */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.hero-feather{animation:none!important}}
+
+.nav{transition:box-shadow .25s ease,background .25s ease}
+.nav.scrolled{box-shadow:0 6px 24px rgba(35,54,42,.08)}
+
+.hero{position:relative;overflow:hidden}
+.hero-feather{position:absolute;right:-30px;top:-30px;width:360px;max-width:62vw;opacity:.07;pointer-events:none;animation:drift 15s ease-in-out infinite alternate}
+.hero-feather svg{width:100%;height:auto}
+@keyframes drift{from{transform:translateY(0) rotate(0)}to{transform:translateY(26px) rotate(5deg)}}
+.hero-center{position:relative;z-index:2}
+
+.btn{transition:transform .15s ease,background .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.pillar{transition:transform .2s ease,box-shadow .2s ease}
+.pillar:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(35,54,42,.10)}
+.fb-img{transition:transform .3s ease}
+.fb-img:hover{transform:translateY(-4px) rotate(-.6deg)}
+.socials a{transition:background .15s ease,transform .15s ease}
+.socials a:hover{transform:translateY(-2px)}
+
+/* ---- Preisseite ---- */
+.psub{background:var(--pine);color:#fff;text-align:center;padding:64px 6vw 36px}
+.psub .eyebrow{font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--sage);margin:0 0 14px}
+.psub h1{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.6vw,50px);margin:0 auto;max-width:20ch;line-height:1.1}
+.psub p{font-size:17px;color:var(--mist);max-width:52ch;margin:18px auto 0}
+.pricing{background:var(--paper);padding-top:52px}
+.ptiers{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1140px;margin:0 auto;align-items:stretch}
+@media(max-width:1000px){.ptiers{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ptiers{grid-template-columns:1fr}}
+.ptier{background:#fff;border:1px solid var(--mist);border-radius:18px;padding:30px 26px;display:flex;flex-direction:column;transition:transform .2s ease,box-shadow .2s ease}
+.ptier:hover{transform:translateY(-5px);box-shadow:0 20px 46px rgba(35,54,42,.11)}
+.ptier.feat{border:2px solid var(--pine);position:relative}
+.ptier.feat::before{content:"Das Herzstück";position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--pine);color:#fff;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;white-space:nowrap}
+.ptier .ptag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin:0 0 8px}
+.ptier h3{font-family:var(--serif);font-weight:600;font-size:25px;color:var(--pine);margin:0 0 4px}
+.ptier .pdesc{font-size:13px;color:#5d6359;margin:0 0 16px;line-height:1.45;min-height:54px}
+.ptier .price{font-family:var(--serif);font-size:34px;font-weight:600;color:var(--pine);margin:0;line-height:1}
+.ptier .price small{font-size:15px;color:#5d6359;font-weight:500}
+.ptier .old{font-size:14px;color:#9aa89a;text-decoration:line-through;margin:2px 0 0}
+.ptier .pspace{margin-bottom:16px}
+.ptier ul{list-style:none;padding:0;margin:6px 0 22px;flex:1}
+.ptier li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;margin-bottom:9px;line-height:1.45;color:var(--ink)}
+.ptier li .dot{width:6px;height:6px;border-radius:50%;background:var(--sage);margin-top:7px;flex-shrink:0}
+.ptier .btn{width:100%;text-align:center;font-size:16px;padding:12px}
+.pnote{max-width:760px;margin:34px auto 0;text-align:center;font-size:14px;color:#5d6359}
+.pfaq{background:var(--cream)}
+.pfaq .sec-h{margin-bottom:26px}
+.faqs{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq{background:#fff;border:1px solid var(--mist);border-radius:14px;padding:0 22px;overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-family:var(--serif);font-size:19px;color:var(--pine);display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:24px;color:var(--sage);transition:transform .2s ease}
+.faq[open] summary::after{content:"–"}
+.faq p{margin:0 0 18px;font-size:14.5px;color:var(--ink);line-height:1.6}

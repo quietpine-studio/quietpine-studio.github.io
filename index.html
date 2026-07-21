@@ -3,75 +3,158 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>QUIETPINE — Dokumente & Systeme, die man wirklich nutzt</title>
-<meta name="description" content="Von einer Prozessingenieurin (Lean Six Sigma): Dokumente & Systeme für Arbeit und Leben. Methodisch tief, schön genug, dass man sie wirklich nutzt.">
+<title>QUIETPINE — KI-Arbeitssysteme für Selbstständige</title>
+<meta name="description" content="Fertige, schön gestaltete KI-Arbeitssysteme für Selbstständige — immer aktuell gehalten. Von einer Prozessingenieurin & Designerin. Kein Guru, keine Abo-Falle, kein Prompt-Friedhof.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="enhance.css">
+<style>
+  .freebie{background:var(--mist)}
+  .fb-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:1000px;margin:0 auto}
+  @media(max-width:820px){.fb-grid{grid-template-columns:1fr;gap:32px}}
+  .fb-img{width:100%;border-radius:16px;border:1px solid var(--mist);box-shadow:0 18px 50px rgba(35,54,42,.16);display:block}
+  .fb-copy .eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--pine);margin:0 0 10px}
+  .fb-copy h2{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.6vw,40px);color:var(--pine);margin:0 0 14px;line-height:1.14}
+  .fb-copy .flist{list-style:none;padding:0;margin:0 0 22px}
+  .fb-copy .flist li{display:flex;gap:9px;align-items:flex-start;font-size:15px;margin-bottom:9px;line-height:1.45}
+  .fb-copy .flist .dot{width:7px;height:7px;border-radius:50%;background:var(--pine);margin-top:7px;flex-shrink:0}
+  .fb-form{display:flex;gap:8px;flex-wrap:wrap;max-width:none;margin:0}
+  .fb-form input{flex:1;min-width:200px;border:1.5px solid #c8cfc4;border-radius:10px;padding:14px 16px;font-family:var(--sans);font-size:15px;background:#fff;color:var(--ink)}
+  .fb-form input:focus{outline:none;border-color:var(--pine)}
+  .fb-form button{background:var(--pine);color:#fff;border:none;border-radius:10px;padding:14px 24px;font-family:var(--serif);font-size:18px;font-weight:500;cursor:pointer;transition:transform .15s ease,background .15s ease}
+  .fb-form button:hover{transform:translateY(-2px);background:var(--deep)}
+  .fb-hint{font-size:13px;color:#5d6359;margin:12px 0 0}
+  .fb-ok{display:none;background:var(--pine);color:#fff;border-radius:14px;padding:22px;margin-top:8px}
+  .fb-ok h3{font-family:var(--serif);margin:0 0 6px;color:#fff}
+  .fb-ok p{color:var(--mist);margin:0;font-size:14px}
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1040px;margin:0 auto}
+  @media(max-width:900px){.pillars{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.pillars{grid-template-columns:1fr}}
+  .pillar{background:#fff;border:1px solid var(--mist);border-radius:16px;padding:26px 24px}
+  .pillar h3{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--pine);margin:0 0 8px}
+  .pillar p{font-size:14px;color:#4b5a4d;margin:0;line-height:1.5}
+  .promise-strip{background:var(--cream);text-align:center;padding:26px 6vw}
+  .promise-strip span{font-family:var(--sans);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--pine)}
+  /* MailerLite-Embed an QuietPine anpassen (meine Section liefert Bild+Überschrift) */
+  .ml-embedded .ml-form-embedContent, .ml-embedded .ml-form-embedHeader, .ml-embedded .ml-form-embedContent h4, .ml-embedded .ml-form-embedContent p{display:none!important}
+  .ml-embedded .ml-form-embedWrapper{background:transparent!important;border:none!important;box-shadow:none!important;max-width:none!important;width:100%!important}
+  .ml-embedded .ml-form-embedBody{padding:0!important;border:none!important}
+  .ml-embedded .ml-form-formContent{margin:0!important}
+  .ml-embedded input.form-control{border:1.5px solid #c8cfc4!important;border-radius:10px!important;padding:14px 16px!important;font-family:var(--sans)!important;font-size:15px!important;background:#fff!important;color:var(--ink)!important}
+  .ml-embedded .ml-form-embedSubmit button{background:var(--pine)!important;color:#fff!important;border:none!important;border-radius:10px!important;font-family:var(--serif)!important;font-size:18px!important;font-weight:500!important;padding:14px 24px!important}
+  .ml-embedded .ml-form-embedSubmit button:hover{background:var(--deep)!important}
+  /* Einsatzbereiche */
+  .usecases{background:var(--cream)}
+  .uc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1040px;margin:0 auto}
+  @media(max-width:820px){.uc-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.uc-grid{grid-template-columns:1fr}}
+  .uc{background:#fff;border:1px solid var(--mist);border-radius:16px;padding:24px 22px;transition:transform .2s ease,box-shadow .2s ease}
+  .uc:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(35,54,42,.10)}
+  .uc .uc-tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);margin:0 0 8px}
+  .uc h3{font-family:var(--serif);font-weight:600;font-size:21px;color:var(--pine);margin:0 0 6px}
+  .uc p{font-size:14px;color:#4b5a4d;margin:0;line-height:1.5}
+  .uc-note{max-width:1040px;margin:22px auto 0;text-align:center;font-size:14px;color:#5d6359}
+</style>
+<!-- MailerLite Universal -->
+<script>
+(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+ml('account', '2393976');
+</script>
+<!-- End MailerLite Universal -->
 </head>
 <body>
 <nav class="nav">
   <a class="brand" href="index.html"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="translate(-3.05,-22.42) scale(1.4593)"><path d="M 44.80 57.48 Q 57.37 44.03 62.33 21.53 Q 51.98 41.40 44.80 57.48 Z" fill="#36523F"/><path d="M 42.00 60.70 Q 55.84 51.18 63.16 31.58 Q 50.66 47.41 42.00 60.70 Z" fill="#36523F"/><path d="M 39.20 63.92 Q 53.29 58.24 62.22 41.69 Q 48.70 53.49 39.20 63.92 Z" fill="#36523F"/><path d="M 36.40 67.14 Q 49.70 64.66 59.34 51.08 Q 46.03 59.42 36.40 67.14 Z" fill="#36523F"/><path d="M 33.60 70.36 Q 45.46 70.58 55.17 59.84 Q 42.83 65.19 33.60 70.36 Z" fill="#36523F"/><path d="M 30.80 73.58 Q 40.71 75.88 49.93 67.73 Q 39.13 70.72 30.80 73.58 Z" fill="#36523F"/><path d="M 28.00 76.80 Q 35.70 80.44 43.80 74.30 Q 34.95 75.70 28.00 76.80 Z" fill="#36523F"/><path d="M 27.20 77.72 L 9.54 68.33" stroke="#36523F" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M 27.20 77.72 L 15.12 67.22" stroke="#36523F" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M 27.20 77.72 L 20.15 68.01" stroke="#36523F" stroke-width="1.6" stroke-linecap="round" fill="none"/></g></svg><span>QUIETPINE</span></a>
   <div class="links">
-    <a href="business.html">Business</a>
-    <a href="leben.html">Leben</a>
+    <a href="#how">So funktioniert's</a>
+    <a href="#fuerwen">Für wen</a>
+    <a href="preise.html">Preise</a>
     <a href="#story">Über mich</a>
-    <a href="#community">Community</a>
-    <a class="btn btn-pine" href="https://quietpine.gumroad.com" target="_blank" rel="noopener" style="font-size:15px;padding:10px 18px">Zum Shop</a>
+    <a class="btn btn-pine" href="#warteliste" style="font-size:15px;padding:10px 18px">Warteliste</a>
   </div>
 </nav>
 
 <header class="hero">
+  <div class="hero-feather"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="translate(-3.05,-22.42) scale(1.4593)"><path d="M 44.80 57.48 Q 57.37 44.03 62.33 21.53 Q 51.98 41.40 44.80 57.48 Z" fill="#FFFFFF"/><path d="M 42.00 60.70 Q 55.84 51.18 63.16 31.58 Q 50.66 47.41 42.00 60.70 Z" fill="#FFFFFF"/><path d="M 39.20 63.92 Q 53.29 58.24 62.22 41.69 Q 48.70 53.49 39.20 63.92 Z" fill="#FFFFFF"/><path d="M 36.40 67.14 Q 49.70 64.66 59.34 51.08 Q 46.03 59.42 36.40 67.14 Z" fill="#FFFFFF"/><path d="M 33.60 70.36 Q 45.46 70.58 55.17 59.84 Q 42.83 65.19 33.60 70.36 Z" fill="#FFFFFF"/><path d="M 30.80 73.58 Q 40.71 75.88 49.93 67.73 Q 39.13 70.72 30.80 73.58 Z" fill="#FFFFFF"/><path d="M 28.00 76.80 Q 35.70 80.44 43.80 74.30 Q 34.95 75.70 28.00 76.80 Z" fill="#FFFFFF"/></g></svg></div>
   <div class="hero-center">
-    <p class="eyebrow">Lean Six Sigma fürs echte Leben</p>
-    <h1>Dokumente &amp; Systeme, die man wirklich nutzt.</h1>
-    <p class="lead">Von einer Prozessingenieurin — methodisch tief, schön genug, dass man sie wirklich benutzt. Für die Arbeit und fürs echte Leben.</p>
+    <p class="eyebrow">KI-Arbeitssysteme für Selbstständige</p>
+    <h1>Du wolltest doch an deinem Projekt arbeiten — nicht mit KI-Tools kämpfen.</h1>
+    <p class="lead">Zehn Apps offen, drei halb geschaute Tutorials, und am Ende machst du alles wie vorher — nur mit schlechtem Gewissen. QUIETPINE gibt dir ein fertiges, schön gestaltetes System, das dir sagt, was du wirklich brauchst, und dich zurück an deine eigentliche Arbeit bringt.</p>
     <div class="cta">
-      <a class="btn btn-cream" href="business.html">Für die Arbeit</a>
-      <a class="btn btn-ghost" href="leben.html" style="color:#fff;border-color:var(--sage)">Fürs Leben</a>
+      <a class="btn btn-cream" href="#warteliste">Gratis-Landkarte holen</a>
+      <a class="btn btn-ghost" href="#how" style="color:#fff;border-color:var(--sage)">So funktioniert's</a>
     </div>
   </div>
 </header>
 
-<section id="welten">
-  <div class="sec-h">
-    <p class="eyebrow">Zwei Welten, ein Anspruch</p>
-    <h2>Wähle deinen Weg</h2>
-    <p>Dieselbe methodische Klarheit — für zwei sehr unterschiedliche Aufgaben. Wähle, was du gerade brauchst.</p>
+<div class="promise-strip"><span>kein Guru · keine Abo-Falle · kein Prompt-Friedhof</span></div>
+
+<section class="freebie" id="warteliste">
+  <div class="fb-grid reveal">
+    <img class="fb-img" src="content-landkarte.png" alt="QUIETPINE KI-Content-Landkarte – Vorschau">
+    <div class="fb-copy">
+      <p class="eyebrow">Gratis zum Start</p>
+      <h2>Die KI-Content-Landkarte</h2>
+      <ul class="flist">
+        <li><span class="dot"></span>Der komplette Ablauf: eine Woche markeneigener Content in 60&nbsp;Minuten.</li>
+        <li><span class="dot"></span>Der eine Schritt, der KI-Content von „generisch" zu „klingt nach dir" macht.</li>
+        <li><span class="dot"></span>Schön gestaltet, sofort nutzbar — und du sicherst dir den Gründerpreis für das volle System.</li>
+      </ul>
+      <div class="ml-embedded" data-form="mF9sR0"></div>
+      <p class="fb-hint">Du kommst auf die Warteliste für den KI-Content-Motor (Gründerpreis 29&nbsp;€ statt 49&nbsp;€). Doppelte Bestätigung per E-Mail (DSGVO), jederzeit abbestellbar.</p>
+    </div>
   </div>
-  <div class="worlds">
-    <a class="wcard biz" href="business.html">
-      <p class="wtag">QUIETPINE · Business</p>
-      <h3>Für die Arbeit</h3>
-      <p class="wsub">SOP-Systeme & Arbeitsanweisungen, die man wirklich liest — audit-fest und sofort einsatzbereit.</p>
-      <ul>
-        <li><span class="dot"></span>SOP-Bundles für KMU &amp; regulierte Fertigung</li>
-        <li><span class="dot"></span>Word + ausfüllbares PDF · DE + EN</li>
-        <li><span class="dot"></span>Gratis Audit-Check &amp; SOP-Vorlage</li>
-      </ul>
-      <span class="go">Business ansehen →</span>
-    </a>
-    <a class="wcard leb" href="leben.html">
-      <p class="wtag">QUIETPINE · Leben</p>
-      <h3>Fürs echte Leben</h3>
-      <p class="wsub">Vorlagen für Vorsorge, Umzug, WG und Studium — schön genug, dass man sie wirklich nutzt.</p>
-      <ul>
-        <li><span class="dot"></span>Vorsorge, Notfall, Wohnen, Abschlussarbeit</li>
-        <li><span class="dot"></span>Word + ausfüllbares PDF · sofort startklar</li>
-        <li><span class="dot"></span>Gratis Notfall-Kontaktblatt</li>
-      </ul>
-      <span class="go">Leben ansehen →</span>
-    </a>
+</section>
+
+<section id="how">
+  <div class="sec-h reveal">
+    <p class="eyebrow">Warum QUIETPINE</p>
+    <h2>Vier Dinge, die andere KI-Angebote vermissen lassen</h2>
+    <p>Der Markt ist voll mit Prompt-Packs und Kursen — die meisten sind oberflächlich, hässlich, veraltet. Genau da setzen wir an.</p>
+  </div>
+  <div class="pillars">
+    <div class="pillar reveal d1"><h3>Prozess</h3><p>Wiederholbare Abläufe statt loser Tipps — als Prozessingenieurin baue ich Systeme, die man wirklich durchzieht.</p></div>
+    <div class="pillar reveal d2"><h3>Design</h3><p>Schön genug, dass du es gern benutzt. Kein hässlicher Prompt-Haufen, sondern klare, gestaltete Vorlagen.</p></div>
+    <div class="pillar reveal d3"><h3>Aktualität</h3><p>Stundenlang das perfekte Tool gesucht, in einer Woche veraltet? Ich halte alles aktuell — du musst nichts nachpflegen.</p></div>
+    <div class="pillar reveal d4"><h3>Ehrlichkeit</h3><p>Fairer Festpreis, klar was drin ist. Kein 3.000-€-Pitch, keine Abo-Falle, keine leeren Versprechen.</p></div>
+  </div>
+</section>
+
+<section class="usecases" id="einsatzbereiche">
+  <div class="sec-h reveal">
+    <p class="eyebrow">Wofür</p>
+    <h2>Ein System für deinen ganzen Arbeitsalltag</h2>
+    <p>Die Bibliothek ist kein Content-Trick — sie deckt die Aufgaben ab, die dich als Selbstständige täglich Zeit kosten. Ein paar Beispiele:</p>
+  </div>
+  <div class="uc-grid">
+    <div class="uc reveal d1"><p class="uc-tag">Content &amp; Social Media</p><h3>Sichtbar bleiben, ohne Kopfzerbrechen</h3><p>Leute stehen auf Trends und Authentizität — bleib immer an der Spitze und ganz du selbst, ohne großen Aufwand.</p></div>
+    <div class="uc reveal d2"><p class="uc-tag">Angebote &amp; Verkauf</p><h3>Angebote in Minuten</h3><p>Schon wieder ein Angebot, das dir die Zeit für deine eigentlichen Projekte raubt? Vom Erstgespräch zum fertigen Angebot in Minuten statt Stunden.</p></div>
+    <div class="uc reveal d3"><p class="uc-tag">Kundengewinnung</p><h3>Kunden anziehen statt jagen</h3><p>Nicht dem Kunden hinterherrennen, sondern ihn wie ein Magnet anziehen — ein wiederholbarer Weg, dauerhaft sichtbar zu werden und Anfragen zu bekommen.</p></div>
+    <div class="uc reveal d1"><p class="uc-tag">Onboarding</p><h3>Neue Kunden, kein Chaos</h3><p>Schon wieder einen Kunden aus den Augen verloren? Jeder Auftrag startet sauber — Begrüßung, Unterlagen, nächste Schritte.</p></div>
+    <div class="uc reveal d2"><p class="uc-tag">Rechnungen &amp; Mahnungen</p><h3>Freundlich &amp; konsequent</h3><p>Geld einfordern ist unangenehm? Mach es freundlich und bestimmt — DACH-konforme Rechnungen und Erinnerungen, die nichts liegen lassen.</p></div>
+    <div class="uc reveal d3"><p class="uc-tag">E-Mail &amp; Organisation</p><h3>Posteingang im Griff</h3><p>Einmal kurz im Urlaub — und zurück im E-Mail-Dschungel? Antwort-Bausteine, Meeting-Notizen zu Aufgaben, dein Wissen sortiert — DSGVO-sicher.</p></div>
+  </div>
+  <p class="uc-note">Und jeden Monat kommt ein neues System dazu — du bestimmst mit, welches als Nächstes.</p>
+</section>
+
+<section id="fuerwen" style="background:var(--paper)">
+  <div class="sec-h reveal" style="margin-bottom:0">
+    <p class="eyebrow">Für wen</p>
+    <h2>Für Selbstständige, die KI schon nutzen — aber im Chaos feststecken</h2>
+    <p>Du hast fünf Tools ausprobiert und nutzt am Ende keins richtig? Deine KI-Texte klingen austauschbar? Du willst kein weiteres „ChatGPT für Anfänger", sondern ein System, das sitzt. Dann bist du hier richtig.</p>
   </div>
 </section>
 
 <section class="story" id="story">
-  <div class="story-in">
+  <div class="story-in reveal">
     <p class="eyebrow">Kurz zu mir</p>
     <p class="q">„Eine Maschine, die ausfällt, brüllen wir nicht an — wir reparieren den Prozess. Bei uns selbst machen wir das Gegenteil."</p>
-    <p>Ich habe Games Art studiert und steckte danach in einem Loch — ich habe aufgeschoben, bis es wehtat. Was mich rausgeholt hat, war keine neue Portion Willenskraft, sondern Struktur. Heute bin ich Prozessingenieurin (Lean Six Sigma).</p>
-    <p>QUIETPINE ist mein Weg, dieses Denken weiterzugeben: Dokumente und Systeme, die methodisch tief und schön genug sind, dass man sie wirklich nutzt. Für die Arbeit — und fürs echte Leben.</p>
+    <p>Ich habe Games Art studiert und steckte danach in einem Loch — ich habe aufgeschoben, bis es wehtat. Was mich rausgeholt hat, war keine neue Portion Willenskraft, sondern Struktur. Heute bin ich Prozessingenieurin (Lean Six Sigma) und Designerin.</p>
+    <p>QUIETPINE ist mein Weg, dieses Denken weiterzugeben: KI-Arbeitssysteme, die methodisch tief und schön genug sind, dass man sie wirklich nutzt — für Selbstständige, die aus dem Tool-Chaos rauswollen.</p>
     <p class="sig">— Coleen</p>
   </div>
 </section>
@@ -79,20 +162,21 @@
 <section class="community" id="community">
   <p class="eyebrow">QUIETPINE-Community</p>
   <h2>Struktur ist schöner mit anderen.</h2>
-  <p>Hinter den Kulissen, neue Vorlagen zuerst, ehrliche Einblicke in den Aufbau von QUIETPINE — und kleine Werkzeuge, die deinen Alltag leichter machen.</p>
+  <p>Hinter den Kulissen, neue Systeme zuerst, ehrliche Einblicke in den Aufbau von QUIETPINE — und kleine Werkzeuge, die deinen Alltag leichter machen.</p>
   <div class="socials">
-    <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.pinterest.com/" target="_blank" rel="noopener">Pinterest</a>
-    <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://www.instagram.com/quietpine.studio/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/in/coleen-z-a62880209/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.tiktok.com/@quietpine.studio" target="_blank" rel="noopener">TikTok</a>
   </div>
 </section>
 
 <footer class="footer">
   <div class="fb"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g transform="translate(-3.05,-22.42) scale(1.4593)"><path d="M 44.80 57.48 Q 57.37 44.03 62.33 21.53 Q 51.98 41.40 44.80 57.48 Z" fill="#FFFFFF"/><path d="M 42.00 60.70 Q 55.84 51.18 63.16 31.58 Q 50.66 47.41 42.00 60.70 Z" fill="#FFFFFF"/><path d="M 39.20 63.92 Q 53.29 58.24 62.22 41.69 Q 48.70 53.49 39.20 63.92 Z" fill="#FFFFFF"/><path d="M 36.40 67.14 Q 49.70 64.66 59.34 51.08 Q 46.03 59.42 36.40 67.14 Z" fill="#FFFFFF"/><path d="M 33.60 70.36 Q 45.46 70.58 55.17 59.84 Q 42.83 65.19 33.60 70.36 Z" fill="#FFFFFF"/><path d="M 30.80 73.58 Q 40.71 75.88 49.93 67.73 Q 39.13 70.72 30.80 73.58 Z" fill="#FFFFFF"/><path d="M 28.00 76.80 Q 35.70 80.44 43.80 74.30 Q 34.95 75.70 28.00 76.80 Z" fill="#FFFFFF"/><path d="M 27.20 77.72 L 9.54 68.33" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M 27.20 77.72 L 15.12 67.22" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M 27.20 77.72 L 20.15 68.01" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" fill="none"/></g></svg><span>QUIETPINE</span></div>
-  <p>Dokumente &amp; Systeme, die man wirklich nutzt — für Arbeit und Leben.</p>
+  <p>KI-Arbeitssysteme für Selbstständige — immer aktuell, schön genug, dass man sie wirklich nutzt.</p>
   <p><a href="mailto:coleen.zegel@quietpine.de">coleen.zegel@quietpine.de</a></p>
   <p class="small">© 2026 QUIETPINE · Coleen Zegel · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
 </footer>
+
+<script src="enhance.js"></script>
 </body>
 </html>
